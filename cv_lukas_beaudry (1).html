@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Lukas Beaudry</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --ink2: #5a5a55;
+      --ink3: #9a9a94;
+      --line: rgba(26,26,24,0.12);
+      --bg: #f7f5f0;
+      --white: #ffffff;
+      --accent: #1a3a2a;
+      --accent-light: #e8f0eb;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 3rem 1rem;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 3.5rem 4rem;
+      position: relative;
+    }
+
+    /* Accent bar */
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 5px; height: 100%;
+      background: var(--accent);
+    }
+
+    /* Header */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 2.5rem;
+    }
+
+    .name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -1px;
+      color: var(--ink);
+    }
+
+    .tagline {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-top: 10px;
+    }
+
+    .contact-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .contact-list a,
+    .contact-list span {
+      font-size: 13px;
+      color: var(--ink2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .contact-list a:hover { color: var(--accent); }
+
+    .contact-list svg {
+      width: 12px; height: 12px;
+      opacity: 0.45;
+      flex-shrink: 0;
+    }
+
+    /* QR code */
+    .qr-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #qrcode canvas, #qrcode img {
+      display: block;
+      width: 90px !important;
+      height: 90px !important;
+    }
+
+    .qr-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      text-align: center;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 2.2rem;
+    }
+
+    .section-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2px 20px;
+      margin-bottom: 1.3rem;
+      padding-bottom: 1.3rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .exp-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .exp-role {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .exp-org {
+      font-size: 13px;
+      color: var(--ink2);
+      margin-top: 2px;
+    }
+
+    .exp-date {
+      font-size: 12px;
+      color: var(--ink3);
+      text-align: right;
+      white-space: nowrap;
+      margin-top: 3px;
+    }
+
+    .exp-desc {
+      grid-column: 1 / -1;
+      font-size: 13px;
+      color: var(--ink2);
+      line-height: 1.65;
+      margin-top: 7px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 9px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid rgba(26,58,42,0.2);
+      margin-top: 5px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Two-col */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    /* Langue row */
+    .lang-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lang-row:last-child { border-bottom: none; }
+
+    .lang-name { font-size: 14px; }
+    .lang-level { font-size: 12px; color: var(--ink3); }
+
+    /* Pills */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 5px 12px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink2);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 11px;
+      color: var(--ink3);
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .page { border: none; box-shadow: none; padding: 2rem 2.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 2rem 1.5rem; }
+      .header { grid-template-columns: 1fr; }
+      .name { font-size: 36px; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="header">
+      <div>
+        <div class="name">Lukas<br>Beaudry</div>
+        <div class="tagline">Étudiant · Sec. 5 · Disponible pour emploi étudiant</div>
+        <div class="contact-list">
+          <a href="tel:5147942134">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.4 19.79 19.79 0 01.12 2.81 2 2 0 012.11.64h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.64a16 16 0 006.28 6.28l1.36-1.36a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            514 794-2134
+          </a>
+          <a href="mailto:lukasbeaudry@hotmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            lukasbeaudry@hotmail.com
+          </a>
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Saint-Bruno-de-Montarville, QC
+          </span>
+        </div>
+      </div>
+
+      <div class="qr-wrap">
+        <div id="qrcode"></div>
+        <div class="qr-label">Mon CV en ligne</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Expériences professionnelles</div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">Emballeur</div>
+          <div class="exp-org">IGA</div>
+        </div>
+        <div class="exp-date">Saint-Bruno, QC</div>
+        <div class="exp-desc">Emballage des articles en caisse, assistance aux clients, maintien de la propreté du secteur et soutien aux équipes en période d'achalandage.</div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">Représentant porte-à-porte</div>
+          <div class="exp-org">Travail autonome</div>
+        </div>
+        <div class="exp-date">Région de Montréal</div>
+        <div class="exp-desc">Démarchage résidentiel, contact direct avec la clientèle, développement de l'aisance en communication et gestion des objections.</div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">Aide à la rénovation</div>
+          <div class="exp-org">Particulier</div>
+        </div>
+        <div class="exp-date">Montréal, QC</div>
+        <div class="exp-desc">Participation à la démolition d'un sous-sol résidentiel : manutention, travail physique soutenu, respect des consignes de sécurité.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Formation</div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">DEC — Sports et marketing</div>
+          <div class="exp-org">Champlain College</div>
+          <div class="badge">À venir — automne 2025</div>
+        </div>
+        <div class="exp-date">Saint-Lambert, QC</div>
+        <div class="exp-desc">Programme axé sur le marketing sportif, avec affiliation à une université australienne offrant une passerelle vers des études universitaires à l'international.</div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">Diplôme d'études secondaires</div>
+          <div class="exp-org">Secondaire 5 — en cours</div>
+        </div>
+        <div class="exp-date">2025</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-label">Langues</div>
+        <div class="lang-row">
+          <span class="lang-name">Français</span>
+          <span class="lang-level">Langue maternelle</span>
+        </div>
+        <div class="lang-row">
+          <span class="lang-name">Anglais</span>
+          <span class="lang-level">Très bonne maîtrise</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Intérêts</div>
+        <div class="pills">
+          <span class="pill">Basketball compétitif (3 ans)</span>
+          <span class="pill">Muay thaï (1 an)</span>
+          <span class="pill">Sports de combat</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Compétences</div>
+      <div class="pills">
+        <span class="pill">Service à la clientèle</span>
+        <span class="pill">Travail d'équipe</span>
+        <span class="pill">Organisation</span>
+        <span class="pill">Communication</span>
+        <span class="pill">Travail physique</span>
+        <span class="pill">Fiabilité</span>
+        <span class="pill">Persévérance</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      Lukas Beaudry &nbsp;·&nbsp; lukasbeaudry@hotmail.com &nbsp;·&nbsp; 514 794-2134
+    </div>
+  </div>
+
+  <script>
+    // QR code — remplace l'URL par ton vrai lien une fois le site hébergé
+    var cvUrl = 'https://ubiquitous-frangollo-3b0dba.netlify.app/';
+    new QRCode(document.getElementById('qrcode'), {
+      text: cvUrl,
+      width: 90,
+      height: 90,
+      colorDark: '#1a3a2a',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  </script>
+</body>
+</html>
