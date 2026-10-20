@@ -1,0 +1,439 @@
+<title>CV — Lukas Beaudry</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+  /* Layout: single-column page with left accent bar, header grid name/QR */
+  :root {
+    --ink: #1a1a18;
+    --ink2: #5a5a55;
+    --ink3: #9a9a94;
+    --line: rgba(26,26,24,0.12);
+    --bg: #f7f5f0;
+    --white: #ffffff;
+    --accent: #1a3a2a;
+    --accent-light: #e8f0eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #edede8;
+      --ink2: #a8a8a0;
+      --ink3: #6a6a62;
+      --line: rgba(237,237,232,0.1);
+      --bg: #161614;
+      --white: #1f1f1d;
+      --accent: #4a8a64;
+      --accent-light: #1a2e22;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #edede8;
+    --ink2: #a8a8a0;
+    --ink3: #6a6a62;
+    --line: rgba(237,237,232,0.1);
+    --bg: #161614;
+    --white: #1f1f1d;
+    --accent: #4a8a64;
+    --accent-light: #1a2e22;
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100%;
+    padding-block: 3rem;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--line);
+    padding: 3.5rem 4rem;
+    position: relative;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    background: var(--accent);
+  }
+
+  /* Header */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem;
+  }
+
+  .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .tagline {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-top: 10px;
+  }
+
+  .contact-list {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .contact-list a,
+  .contact-list span {
+    font-size: 13px;
+    color: var(--ink2);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .contact-list a:hover { color: var(--accent); }
+
+  .contact-list svg {
+    width: 12px; height: 12px;
+    opacity: 0.45;
+    flex-shrink: 0;
+  }
+
+  /* QR */
+  .qr-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .qr-inner {
+    padding: 8px;
+    background: #fff;
+    border: 1px solid rgba(26,26,24,0.1);
+  }
+
+  #qrcode canvas, #qrcode img {
+    display: block;
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .qr-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    text-align: center;
+  }
+
+  /* Sections */
+  .section { margin-bottom: 2.2rem; }
+
+  .section-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 20px;
+    margin-bottom: 1.3rem;
+    padding-bottom: 1.3rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .exp-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .exp-role {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .exp-org {
+    font-size: 13px;
+    color: var(--ink2);
+    margin-top: 2px;
+  }
+
+  .exp-date {
+    font-size: 12px;
+    color: var(--ink3);
+    text-align: right;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .exp-desc {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    color: var(--ink2);
+    line-height: 1.65;
+    margin-top: 7px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 9px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid rgba(26,58,42,0.2);
+    margin-top: 5px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Two-col */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  /* Pills */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .pill {
+    font-size: 12px;
+    padding: 5px 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink2);
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--ink3);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page { border: none; box-shadow: none; padding: 2rem 2.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 2rem 1.5rem; }
+    .header { grid-template-columns: 1fr; }
+    .name { font-size: 36px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="name">Lukas<br>Beaudry</div>
+      <div class="tagline">Cégep Student &nbsp;·&nbsp; Sports Marketing &amp; Management &nbsp;·&nbsp; Available for Part-Time Work</div>
+      <div class="contact-list">
+        <a href="tel:5147942134">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.4 19.79 19.79 0 01.12 2.81 2 2 0 012.11.64h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.64a16 16 0 006.28 6.28l1.36-1.36a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          514 794-2134
+        </a>
+        <a href="mailto:lukasbeaudry@hotmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          lukasbeaudry@hotmail.com
+        </a>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Saint-Bruno-de-Montarville, QC
+        </span>
+      </div>
+    </div>
+
+    <div class="qr-wrap">
+      <div class="qr-inner">
+        <div id="qrcode"></div>
+      </div>
+      <div class="qr-label">Send me an email</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Profile</div>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.75;">First-semester student at Cégep Champlain in Sports Marketing &amp; Management, recognized for reliability, energy, and strong client rapport. Hands-on experience in customer service and fieldwork. Fast learner, hard worker, always ready to help.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Work Experience</div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">Door-to-Door Sales Representative</div>
+        <div class="exp-org">Protek Calfeutrage</div>
+      </div>
+      <div class="exp-date">Sept. 2026 — present</div>
+      <div class="exp-desc">Residential canvassing for a caulking and weatherproofing company; appointment booking and direct client contact.</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">Traffic Control Person</div>
+        <div class="exp-org">Placement Globale</div>
+      </div>
+      <div class="exp-date">Aug. 2026 — present</div>
+      <div class="exp-desc">Traffic control and safety on road construction sites; managing traffic flow and following worksite safety protocols.</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">Actor — Video</div>
+        <div class="exp-org">HxN Portfolio</div>
+      </div>
+      <div class="exp-date">Summer 2026</div>
+      <div class="exp-desc">Acted in a video production by HxN Portfolio.</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">Renovation Helper</div>
+        <div class="exp-org">Residential project</div>
+      </div>
+      <div class="exp-date">Fall 2025</div>
+      <div class="exp-desc">Assisted with a residential basement demolition: hauling, sustained physical labour, and adherence to safety guidelines.</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">Door-to-Door Sales Representative</div>
+        <div class="exp-org">Solution Isolation</div>
+      </div>
+      <div class="exp-date">Aug. — Nov. 2025</div>
+      <div class="exp-desc">Residential door-to-door sales, direct client contact, building communication skills and handling objections. Averaged 2–3 appointments per shift.</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">Actor — Educational Video</div>
+        <div class="exp-org">Alloprof</div>
+      </div>
+      <div class="exp-date">Summer 2025</div>
+      <div class="exp-desc">Acted in an educational video produced by Alloprof, a Quebec homework-help organization with a YouTube presence.</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">Bagger</div>
+        <div class="exp-org">IGA</div>
+      </div>
+      <div class="exp-date">Summer 2023</div>
+      <div class="exp-desc">Bagging groceries at checkout, assisting customers, keeping the area tidy, and supporting the team during busy periods.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Education</div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">DEC — Sports Marketing &amp; Management</div>
+        <div class="exp-org">Champlain College</div>
+        <div class="badge">1st semester — Fall 2026</div>
+      </div>
+      <div class="exp-date">Saint-Lambert, QC</div>
+      <div class="exp-desc">3-year technical program focused on sports marketing, affiliated with an Australian university offering a pathway to international university studies.</div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <div class="exp-role">High School Diploma</div>
+        <div class="exp-org">Secondary 5</div>
+      </div>
+      <div class="exp-date">2026</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-label">Languages</div>
+      <div class="pills">
+        <span class="pill">French — native</span>
+        <span class="pill">English — highly proficient</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Interests</div>
+      <div class="pills">
+        <span class="pill">Competitive basketball (3 yrs)</span>
+        <span class="pill">Muay Thai (1 yr)</span>
+        <span class="pill">Combat sports</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Skills</div>
+    <div class="pills">
+      <span class="pill">Customer service</span>
+      <span class="pill">Teamwork</span>
+      <span class="pill">Organization</span>
+      <span class="pill">Communication</span>
+      <span class="pill">Physical work</span>
+      <span class="pill">Reliability</span>
+      <span class="pill">Perseverance</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    Lukas Beaudry &nbsp;·&nbsp; lukasbeaudry@hotmail.com &nbsp;·&nbsp; 514 794-2134
+  </div>
+</div>
+
+<script>
+  new QRCode(document.getElementById('qrcode'), {
+    text: 'mailto:lukasbeaudry@hotmail.com',
+    width: 90,
+    height: 90,
+    colorDark: '#1a3a2a',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
